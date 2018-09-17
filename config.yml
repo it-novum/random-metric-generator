@@ -1,0 +1,17 @@
+
+# Attention
+# This is a testing script. There is no validation of configuration parameters yet!
+
+cratedb:
+  host: 127.0.0.1
+  port: 4200
+
+mysql:
+  host: 127.0..1
+  port: 3306
+  username: username
+  password: password
+
+graphite:
+  host: 127.0.0.1
+  port: 2003

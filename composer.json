@@ -1,0 +1,12 @@
+{
+    "require": {
+        "symfony/console": "^4.1",
+        "crate/crate-pdo": "^0.7.0",
+        "symfony/yaml": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "itnovum\\metrics\\generator\\": "src/itnovum/metrics/generator/"
+        }
+    }
+}
