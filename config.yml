@@ -15,3 +15,10 @@ mysql:
 graphite:
   host: 127.0.0.1
   port: 2003
+
+#Fake check result values
+#check_interval in minutes
+check_interval: 1
+
+# Days you want to generate performance data for
+days: 90

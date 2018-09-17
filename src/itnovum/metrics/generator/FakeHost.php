@@ -40,28 +40,39 @@ class FakeHost {
         $this->hostname = $hostname;
     }
 
-    public function getMetrics() {
+    /**
+     * @param int|null $timestamp
+     * @return array
+     */
+    public function getMetrics($timestamp = null) {
+        if ($timestamp === null) {
+            $timestamp = time();
+        }
+
         return [
             [
                 'hostname'            => $this->hostname,
                 'service_description' => 'CPU Load',
                 'label'               => 'load1',
                 'unit'                => null,
-                'value'               => rand()
+                'value'               => rand(),
+                'timestamp'           => $timestamp
             ],
             [
                 'hostname'            => $this->hostname,
                 'service_description' => 'CPU Load',
                 'label'               => 'load5',
                 'unit'                => null,
-                'value'               => rand()
+                'value'               => rand(),
+                'timestamp'           => $timestamp
             ],
             [
                 'hostname'            => $this->hostname,
                 'service_description' => 'CPU Load',
                 'label'               => 'load15',
                 'unit'                => null,
-                'value'               => rand()
+                'value'               => rand(),
+                'timestamp'           => $timestamp
             ],
 
             [
@@ -69,14 +80,16 @@ class FakeHost {
                 'service_description' => 'Ping',
                 'label'               => 'rta',
                 'unit'                => 'ms',
-                'value'               => rand(1, 500)
+                'value'               => rand(1, 500),
+                'timestamp'           => $timestamp
             ],
             [
                 'hostname'            => $this->hostname,
                 'service_description' => 'Ping',
                 'label'               => 'pl',
                 'unit'                => '%s',
-                'value'               => rand(0, 100)
+                'value'               => rand(0, 100),
+                'timestamp'           => $timestamp
             ],
 
             [
@@ -84,7 +97,8 @@ class FakeHost {
                 'service_description' => 'Disk /',
                 'label'               => '/',
                 'unit'                => 'MB',
-                'value'               => rand(1300, 5000)
+                'value'               => rand(1300, 5000),
+                'timestamp'           => $timestamp
             ]
         ];
     }

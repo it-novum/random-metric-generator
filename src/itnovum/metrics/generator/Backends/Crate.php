@@ -43,7 +43,7 @@ class Crate implements BackendInterface {
         $baseQuery = 'INSERT INTO statusengine_perfdata (hostname, service_description, label, timestamp, timestamp_unix, value, unit)VALUES%s';
         $baseValues = '(?, ?, ?, ?, ?, ?, ?)';
         $values = [];
-        for($i=1; $i<=sizeof($metrics); $i++){
+        for ($i = 1; $i <= sizeof($metrics); $i++) {
             $values[] = $baseValues;
         }
         $query = $this->connection->prepare(sprintf($baseQuery, implode(', ', $values)));
@@ -54,8 +54,8 @@ class Crate implements BackendInterface {
             $query->bindValue($i++, $metric['hostname']);
             $query->bindValue($i++, $metric['service_description']);
             $query->bindValue($i++, $metric['label']);
-            $query->bindValue($i++, (time() * 1000));
-            $query->bindValue($i++, time());
+            $query->bindValue($i++, ($metric['timestamp'] * 1000));
+            $query->bindValue($i++, $metric['timestamp']);
             $query->bindValue($i++, (double)$metric['value']);
             $query->bindValue($i++, $metric['unit']);
         }
