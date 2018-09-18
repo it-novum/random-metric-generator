@@ -26,7 +26,7 @@ class Mysql implements BackendInterface {
     public function connect() {
         $this->connection = new \PDO(
             sprintf(
-                'mysql:dbname=statusengine;host=$host',
+                'mysql:dbname=statusengine;host=%s;port=%s',
                 $this->config['mysql']['host'],
                 $this->config['mysql']['port']
             ), $this->config['mysql']['username'], $this->config['mysql']['password']);
