@@ -6,6 +6,8 @@ namespace itnovum\metrics\generator;
 
 use itnovum\metrics\generator\Backends\Crate;
 use itnovum\metrics\generator\Backends\DevNull;
+use itnovum\metrics\generator\Backends\Elasticsearch;
+use itnovum\metrics\generator\Backends\Graphite;
 use itnovum\metrics\generator\Backends\Mysql;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -57,6 +59,14 @@ class GeneratorCommand extends Command {
 
             case 'mysql':
                 $Backend = new Mysql($Config);
+                break;
+
+            case 'elasticsearch':
+                $Backend = new Elasticsearch($Config);
+                break;
+
+            case 'graphite':
+                $Backend = new Graphite($Config);
                 break;
 
             default:
