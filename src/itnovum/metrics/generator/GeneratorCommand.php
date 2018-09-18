@@ -33,6 +33,7 @@ class GeneratorCommand extends Command {
         $this->addOption('num-hosts', null, InputOption::VALUE_OPTIONAL, 'Number of hosts', 100);
         $this->addOption('backend', null, InputOption::VALUE_OPTIONAL, 'Storage backend: ' . implode(', ', $this->supportedBackends), 'mysql');
         $this->addOption('parst', null, InputOption::VALUE_OPTIONAL, 'Generate history data (timespan defined in config as days)', false);
+        $this->addOption('start', null, InputOption::VALUE_OPTIONAL, 'Start value of hosts', 0);
 
 
     }
@@ -46,8 +47,11 @@ class GeneratorCommand extends Command {
         $Config = new Config();
         $Mountains = new Mountains();
         $hosts = [];
-        for ($i = 0; $i < $input->getOption('num-hosts'); $i++) {
-            $hosts[] = new FakeHost($Mountains->getRandomMountain());
+
+        $i = (int)$input->getOption('start');
+
+        for (;$i < $input->getOption('num-hosts'); $i++) {
+            $hosts[] = new FakeHost($Mountains->getMountainsById($i));
         }
 
         $backendName = $input->getOption('backend');

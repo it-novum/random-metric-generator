@@ -1621,6 +1621,14 @@ class Mountains {
     }
 
     /**
+     * @param int $id
+     * @return string
+     */
+    public function getMountainsById($id) {
+        return $this->mountains[$id];
+    }
+
+    /**
      * @return string
      */
     public function getRandomMountain(){
