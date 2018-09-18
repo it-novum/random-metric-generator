@@ -4,10 +4,9 @@
 namespace itnovum\metrics\generator\Backends;
 
 
-use Crate\PDO\PDO;
 use itnovum\metrics\generator\Config;
 
-class Crate implements BackendInterface {
+class Mysql implements BackendInterface {
 
     /**
      * @var array
@@ -15,7 +14,7 @@ class Crate implements BackendInterface {
     private $config;
 
     /**
-     * @var PDO
+     * @var \PDO
      */
     private $connection;
 
@@ -25,13 +24,12 @@ class Crate implements BackendInterface {
 
 
     public function connect() {
-        $this->connection = new PDO(
+        $this->connection = new \PDO(
             sprintf(
-                'crate:%s:%s',
-                $this->config['cratedb']['host'],
-                $this->config['cratedb']['port']
-            ),
-            null, null, null);
+                'mysql:dbname=$db;host=$host',
+                $this->config['mysql']['host'],
+                $this->config['mysql']['port']
+            ), $this->config['mysql']['username'], $this->config['mysql']['password']);
     }
 
     /**
@@ -66,8 +64,7 @@ class Crate implements BackendInterface {
         }catch (\Exception $e){
             print_r($e->getMessage());
             echo PHP_EOL;
-        }
-        $end = microtime(true);
+        }        $end = microtime(true);
         return $end - $start;
     }
 

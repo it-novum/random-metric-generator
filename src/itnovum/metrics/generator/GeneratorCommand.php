@@ -6,6 +6,7 @@ namespace itnovum\metrics\generator;
 
 use itnovum\metrics\generator\Backends\Crate;
 use itnovum\metrics\generator\Backends\DevNull;
+use itnovum\metrics\generator\Backends\Mysql;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -52,6 +53,10 @@ class GeneratorCommand extends Command {
         switch ($backendName) {
             case 'cratedb':
                 $Backend = new Crate($Config);
+                break;
+
+            case 'mysql':
+                $Backend = new Mysql($Config);
                 break;
 
             default:
