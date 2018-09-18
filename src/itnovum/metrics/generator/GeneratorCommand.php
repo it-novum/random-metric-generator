@@ -50,7 +50,7 @@ class GeneratorCommand extends Command {
 
         $i = (int)$input->getOption('start');
 
-        for (;$i < $input->getOption('num-hosts'); $i++) {
+        for (;$i < (int)$input->getOption('num-hosts') + (int)$input->getOption('start'); $i++) {
             $hosts[] = new FakeHost($Mountains->getMountainsById($i));
         }
 
