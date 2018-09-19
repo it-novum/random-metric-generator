@@ -34,16 +34,16 @@ class Elasticsearch implements BackendInterface {
 
         $index = sprintf('statusengine-metric-%s', date('Y.m.d', $metrics[0]['timestamp']));
 
-        $bulkData = [
-            [
+        $bulkData = [];
+
+        foreach ($metrics as $metric) {
+            $bulkData[] = [
                 'index' => [
                     '_index' => $index,
                     '_type'  => 'metric',
                 ]
-            ]
-        ];
+            ];
 
-        foreach ($metrics as $metric) {
             $bulkData[] =
                 [
                     '@timestamp'          => ($metric['timestamp'] * 1000),
@@ -56,7 +56,7 @@ class Elasticsearch implements BackendInterface {
 
 
         $Client = $this->Client = $Client = ClientBuilder::create()->setHosts([
-            sprintf('%s:%s', $this->config['elasticsearch']['host'], $this->config['elasticsearch']['host'])
+            sprintf('%s:%s', $this->config['elasticsearch']['host'], $this->config['elasticsearch']['port'])
         ])->build();
 
         $start = microtime(true);
