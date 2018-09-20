@@ -9,6 +9,7 @@ use itnovum\metrics\generator\Backends\DevNull;
 use itnovum\metrics\generator\Backends\Elasticsearch;
 use itnovum\metrics\generator\Backends\Graphite;
 use itnovum\metrics\generator\Backends\Mysql;
+use itnovum\metrics\generator\Backends\Rrdtool;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,6 +23,7 @@ class GeneratorCommand extends Command {
         'graphite',
         'cratedb',
         'elasticsearch',
+        'rrdtool',
         'devnull'
     ];
 
@@ -71,6 +73,10 @@ class GeneratorCommand extends Command {
 
             case 'graphite':
                 $Backend = new Graphite($Config);
+                break;
+
+            case 'rrdtool':
+                $Backend = new Rrdtool($Config);
                 break;
 
             default:

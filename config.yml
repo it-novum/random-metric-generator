@@ -20,6 +20,9 @@ graphite:
   host: 127.0.0.1
   port: 2003
 
+rrdtool:
+  path: /var/lib/rrdtool
+
 #Fake check result values
 #check_interval in minutes
 check_interval: 1
